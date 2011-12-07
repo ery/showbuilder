@@ -1,4 +1,8 @@
+require 'view_builder/corekit'
+require 'view_builder/model_view_builder'
+
 module Viewbuilder
+  include ViewBuilder::Corekit
 
   #
   # show_model_view @product do |view|
@@ -11,7 +15,16 @@ module Viewbuilder
   # end
   #
   def show_model_view(model, &block)
-    tag :table, :class => "model_view"
+    return unless model
+    contents_tag(:table, :class => self.show_model_view_option_class) do |contents|
+      builder = Viewbuilder::ModelViewBuilder.new(model, self)
+      contents << builder.show_view_header
+      contents << capture(builder, &block)
+    end
+  end
+
+  def show_model_view_option_class
+    "bordered-table"
   end
 
   #
