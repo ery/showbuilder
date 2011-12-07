@@ -1,0 +1,4 @@
+touch view_builder.gemspec
+mkdir lib
+touch lib/view_builder.rb
+
