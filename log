@@ -2,3 +2,7 @@ touch view_builder.gemspec
 mkdir lib
 touch lib/view_builder.rb
 rvm --rvmrc --create 1.8.7@view_builder
+
+
+gem build view_builder.gemspec
+gem install view_builder-0.0.1.gem
