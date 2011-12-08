@@ -1,32 +1,36 @@
 require 'view_builder/template_methods'
 
 module Viewbuilder
-  class ModelFormBuilder < ActionView::Helpers::FormBuilder
+  class FormBuilder
     include ViewBuilder::TemplateMethods
     include ViewBuilder::I18nText
 
-    def show_text_input(field)
-      self.show_field_core(field) do
-        self.text_field(field, :class => 'xlarge', :id => 'xlInput')
-      end
+    def initialize(template)
+      @template = template
     end
 
     def show_email_input(field)
       self.show_field_core(field) do
         self.contents_tag(:div, :class => "input-append") do |contents|
-          contents << self.email_field(field, :class => 'xlarge', :id => 'xlInput')
+          contents << self.email_field_tag(field, nil, :class => 'xlarge', :id => 'xlInput')
           contents << self.content_tag(:span, "@", :class => "add-on")
         end
       end
     end
 
-    def show_password_input(field)
+    def show_text_input(field)
       self.show_field_core(field) do
-        self.password_field(field, :class => 'xlarge', :id => 'xlInput')
+        self.text_field_tag(field, nil, :class => 'xlarge', :id => 'xlInput')
       end
     end
 
-    def show_model_form_button()
+    def show_password_input(field)
+      self.show_field_core(field) do
+        self.password_field_tag(field, nil, :class => 'xlarge', :id => 'xlInput')
+      end
+    end
+
+    def show_form_button()
       text_button         = I18n.t('form_button')
       text_button_loading = I18n.t('form_button_loading')
 
@@ -37,7 +41,7 @@ module Viewbuilder
 
       self.content_tag(:button, text_button, options)
     end
-    
+
     protected
 
     def show_field_core(field)
@@ -50,15 +54,8 @@ module Viewbuilder
       end
     end
 
-    def field_label(method, text_id = nil, option = {})
-      text_id ||= method
-      text = self.current_itext(text_id)
-      self.label(method, text, option)
-    end
-
     def current_text_group
-      self.object.class.to_s.underscore
+      self.controller_name.to_s.singularize + '.form'
     end
-    
   end
 end

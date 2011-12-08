@@ -1,9 +1,11 @@
 require 'view_builder/corekit'
 require 'view_builder/model_view_builder'
 require 'view_builder/model_form_builder'
+require 'view_builder/form_builder'
 
 module Viewbuilder
   include ViewBuilder::Corekit
+  include ViewBuilder::I18nText
 
   #
   # show_model_view @product do |view|
@@ -17,7 +19,6 @@ module Viewbuilder
   #
   # dependents:
   # text_group = @product.class.to_s.underscore
-  # I18n.t("#{text_group}.view_header")
   # I18n.t("#{text_group}.number")
   # I18n.t("#{text_group}.name")
   # I18n.t("#{text_group}.price")
@@ -25,10 +26,9 @@ module Viewbuilder
   def show_model_view(model, &block)
     return unless model
 
-    builder = Viewbuilder::ModelViewBuilder.new(model, self)
-    contents_tag(:table, :class => builder.options_table_class) do |contents|
-      contents << builder.show_view_header
-      contents << capture(builder, &block)
+    view = Viewbuilder::ModelViewBuilder.new(model, self)
+    content_tag(:table, :class => view.options_table_class) do
+      capture(view, &block)
     end
   end
 
@@ -67,6 +67,16 @@ module Viewbuilder
     end
   end
   
+  def show_form(url, &block)
+    self.form_tag url do
+      form = Viewbuilder::FormBuilder.new(self)
+      self.html_contents do |contents|
+        contents << self.capture(form, &block)
+        contents << form.show_form_button
+      end
+    end
+  end
+
   #
   # show_model_list @products do |list|
   #   list.show_column                :x_field
@@ -83,6 +93,29 @@ module Viewbuilder
   # end
   #
   def show_model_list(model, &block)
+  end
+
+  def show_page_title
+    self.content_tag :div, :class => 'page-header' do
+      self.content_tag :h1 do
+        self.current_itext("title_#{self.action_name}")
+      end
+    end
+  end
+
+  def show_alerts
+    self.html_contents do |contents|
+      self.flash.each do |name, message|
+        contents << self.contents_tag(:div, :class => 'alert-message error') do |contents|
+          contents << self.content_tag(:a, "x", :href => '#', :class => 'close')
+          contents << self.content_tag(:p, message)
+        end
+      end
+    end
+  end
+
+  def current_text_group
+    self.controller_name.to_s.singularize
   end
 
   ::ActionView::Base.send :include, self

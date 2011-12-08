@@ -1,14 +1,16 @@
 require 'view_builder/template_methods'
+require 'view_builder/i18n_text'
 
 module Viewbuilder
   class ModelViewBuilder
     include ViewBuilder::TemplateMethods
+    include ViewBuilder::I18nText
 
     attr_reader :model
 
     def initialize(model, template)
-      @model = model
-      @template = template
+      @model      = model
+      @template   = template
     end
 
     def show_text(method)
@@ -51,15 +53,6 @@ module Viewbuilder
       self.show_text_filed_core(label, content)
     end
 
-    def show_view_header
-      self.content_tag :thead do
-        view_header = self.current_itext('view_header')
-        self.content_tag :tr do
-          self.content_tag(:th, view_header)
-        end
-      end
-    end
-
     def options_table_class
       "bordered-table"
     end
@@ -88,9 +81,8 @@ module Viewbuilder
       end
     end
 
-    def current_itext(text_id)
-      text_group = self.model.class.to_s.underscore
-      I18n.t("#{text_group}.#{text_id}")
+    def current_text_group
+      self.model.class.to_s.underscore
     end
   end
 end
