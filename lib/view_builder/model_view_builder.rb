@@ -35,40 +35,47 @@ module Viewbuilder
       end
     end
 
-    # row.show_text_to :sale, :number
-    # row.show_text_to :contact, :name
-    # row.show_text_to :unit, :name
+    # show_text_link :sale, :number
+    # show_text_link :customer, :name
     def show_text_link(link_method, text_method)
       link_model = self.model.send(link_method)
 
       text = ""
       if link_model
-        text = link_model.send(text_method) 
+        text = link_model.send(text_method)
         text = self.safe_html_string(text)
       end
 
-      label   = self.show_i18n_text("#{link_method}.#{text_method}")
+      label   = self.current_itext("#{link_method}.#{text_method}")
       content = self.show_text_link_core(text, link_model)
       self.show_text_filed_core(label, content)
     end
 
     def show_view_header
       self.content_tag :thead do
-        view_header = self.show_i18n_text('view_header')
+        view_header = self.current_itext('view_header')
         self.content_tag :tr do
           self.content_tag(:th, view_header)
         end
       end
     end
 
+    def options_table_class
+      "bordered-table"
+    end
+    
     protected
+
+    def options_td_class
+      'span2'
+    end
 
     def show_text_link_core(text, link_model)
       self.link_to(text, link_model)
     end
-    
+
     def show_text_filed(method, &block)
-      label = self.show_i18n_text(method)
+      label = self.current_itext(method)
       content = self.model.send(method)
       content = block.call(content) if block
       self.show_text_filed_core(label, content)
@@ -76,18 +83,14 @@ module Viewbuilder
 
     def show_text_filed_core(label, content)
       self.contents_tag :tr do |contents|
-        contents << self.content_tag(:td, label,    :class => self.show_text_filed_td_option_class)
-        contents << self.content_tag(:td, content,  :class => self.show_text_filed_td_option_class)
+        contents << self.content_tag(:td, label,    :class => self.options_td_class)
+        contents << self.content_tag(:td, content,  :class => self.options_td_class)
       end
     end
 
-    def show_i18n_text(text_id)
-      text_group =  self.model.class.to_s.underscore
+    def current_itext(text_id)
+      text_group = self.model.class.to_s.underscore
       I18n.t("#{text_group}.#{text_id}")
-    end
-
-    def show_text_filed_td_option_class
-      'span2'
     end
   end
 end
