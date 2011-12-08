@@ -54,29 +54,39 @@ module Viewbuilder
   # I18n.t("#{text_group}.form_button")
   # I18n.t("#{text_group}.form_button_loading")
   #
-  def show_model_form(model, options = {}, &block)
-    options.merge!({:builder => Viewbuilder::ModelFormBuilder})
+  def show_model_form(model, &block)
     self.html_contents do |contents|
       contents << self.error_messages_for(model) || ""
-      contents << self.form_for(model, options) do |form|
+      contents << self.form_for(model, :builder => Viewbuilder::ModelFormBuilder) do |form|
         self.html_contents do |contents|
           contents << capture(form, &block)
-          contents << form.show_model_form_button
+          contents << self.show_form_button
         end
       end
     end
   end
   
-  def show_form(url, &block)
+  def show_form(url, options, &block)
     self.form_tag url do
       form = Viewbuilder::FormBuilder.new(self)
       self.html_contents do |contents|
         contents << self.capture(form, &block)
-        contents << form.show_form_button
+        contents << self.show_form_button(options[:button])
       end
     end
   end
 
+  def show_form_button(text_id = nil)
+    text_id                       ||= 'commit'
+    text                          = I18n.t("form_button.#{text_id}")
+    text_loading                  = I18n.t("form_button.#{text_id}_loading")
+    options                       = {}
+    options['class']              = "form-button btn primary"
+    options['data-loading-text']  = text_loading
+    options['type']               = :button
+    self.content_tag(:button, text, options)
+  end
+    
   #
   # show_model_list @products do |list|
   #   list.show_column                :x_field

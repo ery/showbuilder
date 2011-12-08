@@ -30,18 +30,6 @@ module Viewbuilder
       end
     end
 
-    def show_form_button()
-      text_button         = I18n.t('form_button')
-      text_button_loading = I18n.t('form_button_loading')
-
-      options = {}
-      options['class']              = "form-button btn primary"
-      options['data-loading-text']  = text_button_loading
-      options['type']               = :button
-
-      self.content_tag(:button, text_button, options)
-    end
-
     protected
 
     def show_field_core(field)
