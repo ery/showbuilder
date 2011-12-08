@@ -1,3 +1,5 @@
 
 # generated gem file
 *.gem
+
+nbproject/private
