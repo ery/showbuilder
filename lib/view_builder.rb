@@ -58,21 +58,15 @@ module Viewbuilder
     self.html_contents do |contents|
       contents << self.error_messages_for(model) || ""
       contents << self.form_for(model, :builder => Viewbuilder::ModelFormBuilder) do |form|
-        self.html_contents do |contents|
-          contents << capture(form, &block)
-          contents << self.show_form_button
-        end
+        capture(form, &block)
       end
     end
   end
-  
-  def show_form(url, options, &block)
+
+  def show_form(url, &block)
     self.form_tag url do
       form = Viewbuilder::FormBuilder.new(self)
-      self.html_contents do |contents|
-        contents << self.capture(form, &block)
-        contents << self.show_form_button(options[:button])
-      end
+      self.capture(form, &block)
     end
   end
 
@@ -86,7 +80,7 @@ module Viewbuilder
     options['type']               = :button
     self.content_tag(:button, text, options)
   end
-    
+
   #
   # show_model_list @products do |list|
   #   list.show_column                :x_field
