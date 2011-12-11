@@ -9,9 +9,19 @@ Gem::Specification.new do |s|
   s.files         = [
                       "lib/view_builder.rb",
                       "lib/view_builder/corekit.rb",
-                      "lib/view_builder/model_view_builder.rb",
-                      "lib/view_builder/template_methods.rb"
+                      "lib/view_builder/i18n_text.rb",
+                      "lib/view_builder/show_form.rb",
+                      "lib/view_builder/show_model_form.rb",
+                      "lib/view_builder/show_model_list.rb",
+                      "lib/view_builder/show_model_view.rb",
+                      "lib/view_builder/builders/form_builder.rb",
+                      "lib/view_builder/builders/model_form_builder.rb",
+                      "lib/view_builder/builders/model_list_builder.rb",
+                      "lib/view_builder/builders/model_view_builder.rb",
+                      "lib/view_builder/builders/template_methods.rb"
                     ]
   s.homepage      = 'http://rubygems.org/gems/hola'
   s.require_paths = ["lib"]  
 end
+
+
