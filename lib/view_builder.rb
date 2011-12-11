@@ -46,5 +46,34 @@ module Viewbuilder
     self.controller_name.to_s.singularize
   end
 
+  def call_object_methods(object, methods)    
+    unless object
+      return
+    end
+
+    methods = Array.wrap(methods)
+    if methods.count == 0
+      return
+    end
+
+    first_method = methods.first
+    unless first_method
+      return
+    end
+
+    unless object.respond_to?(first_method)
+      return
+    end
+
+    method_result = object.send(first_method)
+    if methods.count <= 1
+      return method_result
+    else
+      remaining_methods = methods.clone
+      remaining_methods.shift
+      return method_result.call_object_method(remaining_methods)
+    end
+  end
+
   ::ActionView::Base.send :include, self
 end
