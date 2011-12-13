@@ -17,6 +17,7 @@ Gem::Specification.new do |s|
                       "lib/view_builder/builders/form_builder.rb",
                       "lib/view_builder/builders/model_form_builder.rb",
                       "lib/view_builder/builders/model_list_builder.rb",
+                      "lib/view_builder/builders/model_list_builder_columns.rb",
                       "lib/view_builder/builders/model_view_builder.rb",
                       "lib/view_builder/builders/template_methods.rb"
                     ]
