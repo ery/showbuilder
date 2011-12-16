@@ -16,13 +16,19 @@ module ViewBuilder
 
       def show_text_column(method)
         self.show_method_column(method) do |value|
-          value.to_s
+          self.safe_html_string(value)
         end
       end
       
       def show_time_column(method)
         self.show_method_column(method) do |value|
           self.time_string(value)
+        end
+      end
+
+      def show_date_column(method)
+        self.show_method_column(method) do |value|
+          self.date_string(value)
         end
       end
 

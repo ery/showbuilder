@@ -14,6 +14,15 @@ module Viewbuilder
         @template   = template
       end
 
+      def build_model_view(&block)
+        unless @model
+          return
+        end
+        self.content_tag(:table, :class => "bordered-table") do
+          @template.capture(self, &block)
+        end
+      end
+
       def show_text(method)
         self.show_method_field(method) do |value|
           self.safe_html_string(value)
@@ -23,6 +32,12 @@ module Viewbuilder
       def show_time(method)
         self.show_method_field(method) do |value|
           self.time_string(value)
+        end
+      end
+
+      def show_date(method)
+        self.show_method_field(method) do |value|
+          self.date_string(value)
         end
       end
 
@@ -53,10 +68,6 @@ module Viewbuilder
         content = self.show_text_link_core(text, link_model)
         self.show_text_filed_core(label, content)
       end
-
-      def options_table_class
-        "bordered-table"
-      end
     
       protected
 
@@ -69,19 +80,15 @@ module Viewbuilder
         self.show_filed(label, method_value)
       end
 
-      def show_filed(label, content)
+      def show_filed(label, value)
         self.contents_tag :tr do |contents|
-          contents << self.content_tag(:td, label,    :class => self.options_td_class)
-          contents << self.content_tag(:td, content,  :class => self.options_td_class)
+          contents << self.content_tag(:td, label, :class => "span2")
+          contents << self.content_tag(:td, value, :class => "span2")
         end
       end
 
       def show_text_link_core(text, link_model)
         self.link_to(text, link_model)
-      end
-
-      def options_td_class
-        'span2'
       end
 
       def current_text_group

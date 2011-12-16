@@ -1,8 +1,7 @@
 require 'view_builder/builders/model_list_builder'
 
 module ViewBuilder
-  module ShowModelList
-    
+  module ShowModelList  
     #
     # show_model_list @products do |list|
     #   list.show_column                :x_field
@@ -20,9 +19,7 @@ module ViewBuilder
     #
     def show_model_list(models, text_group = nil, &block)
       builder = ViewBuilder::Builders::ModelListBuilder.new(self, text_group)
-      yield builder
-      builder.generate_table(models)
-    end
-    
+      builder.build_model_list(models, &block)
+    end    
   end
 end

@@ -1,8 +1,7 @@
 require 'view_builder/builders/model_view_builder'
 
 module ViewBuilder
-  module ShowModelView
-    
+  module ShowModelView    
     #
     # show_model_view @product do |view|
     #   view.show_text      :name
@@ -19,15 +18,8 @@ module ViewBuilder
     # I18n.t("#{text_group}.price")
     #
     def show_model_view(model, &block)
-      unless model
-        return
-      end
-
-      view = Viewbuilder::Builders::ModelViewBuilder.new(model, self)
-
-      content_tag(:table, :class => view.options_table_class) do
-        capture(view, &block)
-      end
+      builder = Viewbuilder::Builders::ModelViewBuilder.new(model, self)
+      builder.build_model_view(&block)
     end
   end
 end

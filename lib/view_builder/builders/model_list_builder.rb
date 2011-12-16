@@ -19,18 +19,16 @@ module ViewBuilder
         self.columns = []
       end
 
-      def generate_table(models)
-        contents_tag(:table, self.table_options) do |contents|
+      def build_model_list(models, &block)
+        block.call(self)
+        
+        contents_tag(:table, :class => 'bordered-table zebra-striped') do |contents|
           contents << self.generate_header
           contents << self.generate_body(models)
         end
       end
 
       protected
-
-      def table_options
-        {:class => 'bordered-table zebra-striped'}
-      end
 
       def generate_header
         self.content_tag :thead do
