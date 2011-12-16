@@ -3,6 +3,7 @@ require 'view_builder/show_model_view'
 require 'view_builder/show_model_form'
 require 'view_builder/show_model_list'
 require 'view_builder/show_form'
+require 'view_builder/show_paginate_renderer'
 
 module Viewbuilder
   include ViewBuilder::Corekit
@@ -11,6 +12,10 @@ module Viewbuilder
   include ViewBuilder::ShowModelForm
   include ViewBuilder::ShowModelList
   include ViewBuilder::ShowForm
+
+  def show_paginate_renderer
+    ViewBuilder::ShowPaginateRenderer
+  end
 
   def show_form_button(text_id = nil)
     text_id                       ||= 'commit'
