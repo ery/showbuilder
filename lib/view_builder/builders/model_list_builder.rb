@@ -10,10 +10,12 @@ module ViewBuilder
       include ViewBuilder::Builders::ModelListBuilderColumns
 
       attr_reader   :template
+      attr_reader   :text_group
       attr_accessor :columns
 
-      def initialize(template)
+      def initialize(template, text_group)
         @template = template
+        @text_group = text_group
         self.columns = []
       end
 
@@ -103,7 +105,7 @@ module ViewBuilder
       end
 
       def current_text_group
-        self.controller_name.to_s.singularize
+        @text_group || self.controller_name.to_s.singularize
       end
     end
   end

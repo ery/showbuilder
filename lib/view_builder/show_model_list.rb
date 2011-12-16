@@ -18,8 +18,8 @@ module ViewBuilder
     #   list.show_time_link_column      :x_field
     # end
     #
-    def show_model_list(models, &block)
-      builder = ViewBuilder::Builders::ModelListBuilder.new(self)
+    def show_model_list(models, text_group = nil, &block)
+      builder = ViewBuilder::Builders::ModelListBuilder.new(self, text_group)
       yield builder
       builder.generate_table(models)
     end
