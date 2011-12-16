@@ -2,8 +2,17 @@ module ViewBuilder
   module I18nText
 
     def current_itext(text_id, *args)
-      crrent_text_id = text_id
-      crrent_text_id = "#{self.current_text_group}.#{text_id}" if self.current_text_group
+      case text_id
+      when Array
+        text_id = text_id.join('.')
+      end
+
+      if self.current_text_group
+        crrent_text_id = "#{self.current_text_group}.#{text_id}" 
+      else
+        crrent_text_id = text_id
+      end
+      
       self.itext(crrent_text_id, *args)
     end
 

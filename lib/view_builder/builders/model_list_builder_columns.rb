@@ -14,22 +14,34 @@ module ViewBuilder
         self.columns << column
       end
 
-      def show_text_column(methods, &block)
-        self.show_column(methods) do |model|
-          self.content_tag(:td) do
-            self.generate_column_text(model, methods, &block)
-          end
+      def show_text_column(method)
+        self.show_method_column(method) do |value|
+          value.to_s
         end
       end
       
+      def show_time_column(method)
+        self.show_method_column(method) do |value|
+          self.time_string(value)
+        end
+      end
+
+      def show_currency_column(method)
+        self.show_method_column(method) do |value|
+          self.currency_string(value)
+        end
+      end
+    
       protected
 
-      def generate_column_text(model, methods, &block)
-        field = self.call_object_methods(model, methods)
-        if block
-          block.call(field)
-        else
-          field.to_s
+      def show_method_column(method, &block)
+        self.show_column(method) do |model|
+          self.content_tag(:td) do
+            method_value = self.call_object_methods(model, method)
+            if block
+              block.call(method_value)
+            end
+          end
         end
       end
     end
