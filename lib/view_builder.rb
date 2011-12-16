@@ -76,7 +76,7 @@ module Viewbuilder
     else
       remaining_methods = methods.clone
       remaining_methods.shift
-      return method_result.call_object_method(remaining_methods)
+      return call_object_methods(method_result, remaining_methods)
     end
   end
 

@@ -41,11 +41,11 @@ module Viewbuilder
       # show_text_link :sale, :number
       # show_text_link :customer, :name
       def show_text_link(link_method, text_method)
-        link_model = self.model.send(link_method)
+        link_model = self.call_object_methods(model, link_method)
 
         text = ""
         if link_model
-          text = link_model.send(text_method)
+          text = link_call_object_methods(model, text_method)
           text = self.safe_html_string(text)
         end
 
@@ -70,7 +70,7 @@ module Viewbuilder
 
       def show_text_filed(method, &block)
         label = self.current_itext(method)
-        content = self.model.send(method)
+        content = self.call_object_methods(model, method)
         content = block.call(content) if block
         self.show_text_filed_core(label, content)
       end
