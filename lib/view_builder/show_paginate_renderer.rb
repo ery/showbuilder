@@ -56,10 +56,11 @@ module ViewBuilder
 
     def previous_or_next_page(page)
       if @collection.current_page <= 1 && @collection.current_page - 1 <= 0
-        page_span(page, "上一页", :class => "prev disabled")
-      else if @collection.current_page <= @collection.total_pages && @collection.current_page + 1 >= @collection.total_pages
-          page_span(page, "下一页", :class => "next disabled")
-        end
+        return page_span(page, @options[:previous_label], :class => "prev disabled")
+      end
+
+      if @collection.current_page <= @collection.total_pages && @collection.current_page + 1 >= @collection.total_pages
+        return page_span(page, @options[:next_label], :class => "next disabled")
       end
     end
   end
