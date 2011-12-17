@@ -37,16 +37,17 @@ module ViewBuilder
           self.currency_string(value)
         end
       end
-    
-      protected
 
       def show_method_column(method, &block)
         self.show_column(method) do |model|
           self.content_tag(:td) do
             method_value = self.call_object_methods(model, method)
             if block
-              block.call(method_value)
+              content = block.call(method_value)
+            else
+              content = method_value
             end
+            content.to_s
           end
         end
       end

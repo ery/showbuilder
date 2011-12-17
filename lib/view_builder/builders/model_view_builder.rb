@@ -14,7 +14,7 @@ module Viewbuilder
         @template   = template
       end
 
-      def build_model_view(&block)
+      def build_model_view(&block)        
         unless @model
           return
         end
@@ -82,8 +82,8 @@ module Viewbuilder
 
       def show_filed(label, value)
         self.contents_tag :tr do |contents|
-          contents << self.content_tag(:td, label, :class => "span2")
-          contents << self.content_tag(:td, value, :class => "span2")
+          contents << self.content_tag(:td, label.to_s, :class => "span2")
+          contents << self.content_tag(:td, value.to_s, :class => "span2")
         end
       end
 

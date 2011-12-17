@@ -48,7 +48,7 @@ module ViewBuilder
       if text.is_a?(String)
         text.gsub(/\n/, "<br/>").html_safe
       else
-        text
+        text.to_s
       end
     end
   end
