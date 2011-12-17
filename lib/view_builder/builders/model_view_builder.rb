@@ -53,43 +53,20 @@ module Viewbuilder
         end
       end
 
-      # show_text_link :sale, :number
-      # show_text_link :customer, :name
-      def show_text_link(link_method, text_method)
-        link_model = self.call_object_methods(model, link_method)
-
-        text = ""
-        if link_model
-          text = link_call_object_methods(model, text_method)
-          text = self.safe_html_string(text)
-        end
-
-        label   = self.current_itext("#{link_method}.#{text_method}")
-        content = self.show_text_link_core(text, link_model)
-        self.show_text_filed_core(label, content)
-      end
-    
-      protected
-
       def show_method_field(method, &block)
-        label = self.current_itext(method)
+        method_label = self.current_itext(method)
         method_value = self.call_object_methods(model, method)
         if block
           method_value = block.call(method_value) 
         end
-        self.show_filed(label, method_value)
-      end
 
-      def show_filed(label, value)
         self.contents_tag :tr do |contents|
-          contents << self.content_tag(:td, label.to_s, :class => "span2")
-          contents << self.content_tag(:td, value.to_s, :class => "span2")
+          contents << self.content_tag(:td, method_label.to_s, :class => "span2")
+          contents << self.content_tag(:td, method_value.to_s, :class => "span2")
         end
       end
-
-      def show_text_link_core(text, link_model)
-        self.link_to(text, link_model)
-      end
+    
+      protected
 
       def current_text_group
         self.model.class.to_s.underscore
