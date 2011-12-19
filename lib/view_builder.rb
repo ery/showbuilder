@@ -5,7 +5,7 @@ require 'view_builder/show_model_list'
 require 'view_builder/show_form'
 require 'view_builder/show_paginate_renderer'
 
-module Viewbuilder
+module ViewBuilder
   include ViewBuilder::Corekit
   include ViewBuilder::I18nText
   include ViewBuilder::ShowModelView

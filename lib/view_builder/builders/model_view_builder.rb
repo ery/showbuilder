@@ -1,7 +1,7 @@
 require 'view_builder/builders/template_methods'
 require 'view_builder/i18n_text'
 
-module Viewbuilder
+module ViewBuilder
   module Builders
     class ModelViewBuilder
       include ViewBuilder::Builders::TemplateMethods

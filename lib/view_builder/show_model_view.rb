@@ -18,7 +18,7 @@ module ViewBuilder
     # I18n.t("#{text_group}.price")
     #
     def show_model_view(model, &block)
-      builder = Viewbuilder::Builders::ModelViewBuilder.new(model, self)
+      builder = ViewBuilder::Builders::ModelViewBuilder.new(model, self)
       builder.build_model_view(&block)
     end
   end

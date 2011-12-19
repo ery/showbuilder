@@ -17,7 +17,7 @@ module ViewBuilder
     # I18n.t("#{text_group}.password")
     #
     def show_model_form(model, options ={}, &block)
-      options.merge!(:builder => Viewbuilder::Builders::ModelFormBuilder)
+      options.merge!(:builder => ViewBuilder::Builders::ModelFormBuilder)
       
       self.html_contents do |contents|
         contents << self.error_messages_for(model) || ""
