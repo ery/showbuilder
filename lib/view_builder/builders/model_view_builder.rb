@@ -29,6 +29,20 @@ module ViewBuilder
         end
       end
 
+      def show_text_link(link_method, text_method)
+        methods      = [link_method, text_method]
+        method_label = self.current_itext(methods)
+        method_value = self.call_object_methods(model, methods)
+        method_link  = self.call_object_methods(model, link_method)
+        
+        self.contents_tag :tr do |contents|
+          contents << self.content_tag(:td, method_label.to_s, :class => "span2")
+          contents << self.content_tag(:td, :class => "span2") do
+            link_to(method_value.to_s, method_link)            
+          end
+        end
+      end
+
       def show_time(method)
         self.show_method_field(method) do |value|
           self.time_string(value)
