@@ -2,7 +2,7 @@ require 'view_builder/builders/model_form_builder'
 
 module ViewBuilder
   module ShowModelForm
-    
+
     #
     # show_model_form @customer do |form|
     #   form.show_text_input            :name
@@ -18,9 +18,9 @@ module ViewBuilder
     #
     def show_model_form(model, options ={}, &block)
       options.merge!(:builder => ViewBuilder::Builders::ModelFormBuilder)
-      
+
       self.html_contents do |contents|
-        contents << self.error_messages_for(model) || ""
+        contents << self.error_messages_for(model)
         contents << self.form_for(model, options) do |form|
           capture(form, &block)
         end
@@ -31,7 +31,14 @@ module ViewBuilder
       options = objects.extract_options!
       options[:header_message] ||= I18n.t(:"activerecord.errors.header", :default => "Invalid Fields")
       options[:message] ||= I18n.t(:"activerecord.errors.message", :default => "Correct the following errors and try again.")
-      messages = objects.compact.map { |o| o.errors.full_messages }.flatten
+
+      messages = objects.compact.map do |object| 
+        object.errors.messages.map do |key, value|
+          value
+        end
+      end
+      messages.flatten!
+
       if messages.empty?
         return
       end
@@ -48,7 +55,7 @@ module ViewBuilder
           list_items.join.html_safe
         end
       end
-      
+
     end
   end
 end
