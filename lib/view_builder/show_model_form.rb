@@ -11,10 +11,10 @@ module ViewBuilder
     # end
     #
     # dependents:
-    # text_group = @customer.class.to_s.underscore
-    # I18n.t("#{text_group}.name")
-    # I18n.t("#{text_group}.email")
-    # I18n.t("#{text_group}.password")
+    # puts @customer.class.to_s.underscore # customer
+    # I18n.t('customer.name')
+    # I18n.t("customer.email')
+    # I18n.t('customer.password')
     #
     def show_model_form(model, options ={}, &block)
       options.merge!(:builder => ViewBuilder::Builders::ModelFormBuilder)
