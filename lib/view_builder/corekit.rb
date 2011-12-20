@@ -21,10 +21,15 @@ module ViewBuilder
     end
 
     def date_string(date)
-      if date
+      case date
+      when Date
+        I18n.l(date)
+      when Time
+        time = date
+        date = time.to_date
         I18n.l(date)
       else
-        ''
+        date.to_s
       end
     end
 
