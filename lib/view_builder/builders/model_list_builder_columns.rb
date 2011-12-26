@@ -63,6 +63,12 @@ module ViewBuilder
         end
       end
 
+      def show_percent_column(*methods)
+        self.show_method_column(methods) do |value|
+          self.percent_string(value)
+        end
+      end
+
       def show_method_column(methods, &block)
         self.show_column(methods) do |model|
           self.content_tag(:td) do
