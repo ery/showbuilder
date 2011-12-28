@@ -58,13 +58,6 @@ module ViewBuilder
         end
       end
 
-      def show_column(methods = nil, &block)
-        column = Column.new
-        column.methods = methods
-        column.generate_column_method = block
-        self.columns << column
-      end
-
       def show_method_column(methods, &block)
         self.show_column(methods) do |model|
           self.content_tag(:td) do
@@ -118,6 +111,13 @@ module ViewBuilder
         end        
       end
 
+      def show_column(methods = nil, &block)
+        column = Column.new
+        column.methods = methods
+        column.generate_column_method = block
+        self.columns << column
+      end
+      
     end
   end
 end
