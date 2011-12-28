@@ -12,6 +12,7 @@ module ViewBuilder
       class Column
         attr_accessor :methods
         attr_accessor :build_body_column_method
+        attr_accessor :build_header_column_method
       end
 
       attr_reader   :template
@@ -46,11 +47,15 @@ module ViewBuilder
       end
 
       def build_header_column(column)
-        self.content_tag(:th) do 
-          if column.methods            
-            methods = Array.wrap(column.methods)
-            text_id = methods.join('.')
-            self.current_itext(text_id)
+        if column.build_header_column_method
+          column.build_header_column_method.call(column)
+        else
+          self.content_tag(:th) do 
+            if column.methods            
+              methods = Array.wrap(column.methods)
+              text_id = methods.join('.')
+              self.current_itext(text_id)
+            end
           end
         end
       end

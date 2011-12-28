@@ -101,10 +101,11 @@ module ViewBuilder
           link_name.to_s
         end
 
-        def show_column(methods = nil, &block)
+        def show_column(methods = nil, build_header_column_method = nil, &build_body_column_method)
           column = ModelListBuilder::Column.new
           column.methods = methods
-          column.build_body_column_method = block
+          column.build_header_column_method = build_header_column_method
+          column.build_body_column_method   = build_body_column_method
           self.columns << column
         end
 
