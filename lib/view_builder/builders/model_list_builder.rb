@@ -31,29 +31,25 @@ module ViewBuilder
       protected
 
       def generate_header
-        self.content_tag :thead do
-          generate_header_row
-        end
-      end
-
-      def generate_header_row
-        contents_tag :tr do |contents|
-          self.columns.each do |column|
-            contents << self.content_tag(:th) do
-              generate_header_column_text(column)
+        self.content_tag :thead do          
+          self.contents_tag :tr do |contents|
+            self.columns.each do |column|
+              contents << self.generate_header_column(column)            
             end
           end
         end
       end
 
-      def generate_header_column_text(column)
-        unless column.methods
-          return " "
-        end
+      def generate_header_column(column)
+        self.content_tag(:th) do 
+          unless column.methods
+            return " "
+          end
 
-        methods = Array.wrap(column.methods)
-        text_id = methods.join('.')
-        self.current_itext(text_id)
+          methods = Array.wrap(column.methods)
+          text_id = methods.join('.')
+          self.current_itext(text_id)
+        end
       end
 
       def generate_body(models)
