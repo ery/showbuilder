@@ -1,5 +1,5 @@
 require 'view_builder/builders/template_methods'
-require 'view_builder/builders/model_list_builder_columns'
+require 'view_builder/builders/model_list_builder/show_columns'
 require 'view_builder/i18n_text'
 
 module ViewBuilder
@@ -7,7 +7,12 @@ module ViewBuilder
     class ModelListBuilder
       include ViewBuilder::I18nText
       include ViewBuilder::Builders::TemplateMethods
-      include ViewBuilder::Builders::ModelListBuilderColumns
+      include ViewBuilder::Builders::ModelListBuilder::ShowColumns
+
+      class Column
+        attr_accessor :methods
+        attr_accessor :build_body_column_method
+      end
 
       attr_reader   :template
       attr_reader   :text_group
@@ -23,64 +28,62 @@ module ViewBuilder
         block.call(self)
         
         contents_tag(:table, :class => 'bordered-table zebra-striped') do |contents|
-          contents << self.generate_header
-          contents << self.generate_body(models)
+          contents << self.build_header
+          contents << self.build_body(models)
         end
       end
 
       protected
 
-      def generate_header
+      def build_header
         self.content_tag :thead do          
           self.contents_tag :tr do |contents|
             self.columns.each do |column|
-              contents << self.generate_header_column(column)            
+              contents << self.build_header_column(column)            
             end
           end
         end
       end
 
-      def generate_header_column(column)
+      def build_header_column(column)
         self.content_tag(:th) do 
-          unless column.methods
-            return " "
+          if column.methods            
+            methods = Array.wrap(column.methods)
+            text_id = methods.join('.')
+            self.current_itext(text_id)
           end
-
-          methods = Array.wrap(column.methods)
-          text_id = methods.join('.')
-          self.current_itext(text_id)
         end
       end
 
-      def generate_body(models)
+      def build_body(models)
         models ||= []
 
         contents_tag :tbody do |contents|
           if models.count == 0
-            contents << generate_body_row_for_no_record
+            contents << build_body_row_for_no_record
           else
             models.each do |model|
-              contents << generate_body_row(model)
+              contents << build_body_row(model)
             end
           end
         end
       end
 
-      def generate_body_row(model)
-        options = self.generate_body_row_options
+      def build_body_row(model)
+        options = self.build_body_row_options
         contents_tag(:tr, options)do |contents|
           self.columns.each do |column|
-            contents << self.generate_body_row_column(column, model)
+            contents << self.build_body_column(column, model)
           end
         end
       end
 
-      def generate_body_row_options
+      def build_body_row_options
         even = self.cycle('', 'even')
         {:class => even}
       end
 
-      def generate_body_row_for_no_record
+      def build_body_row_for_no_record
         contents_tag :tr do |contents|
           self.columns.each_index do |index|
             contents << self.content_tag(:td) do
@@ -90,9 +93,9 @@ module ViewBuilder
         end
       end
 
-      def generate_body_row_column(column, model)
-        if column.generate_column_method
-          column.generate_column_method.call(model)
+      def build_body_column(column, model)
+        if column.build_body_column_method
+          column.build_body_column_method.call(model)
         else
           self.tag(:td)
         end
