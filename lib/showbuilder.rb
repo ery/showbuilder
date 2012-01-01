@@ -1,20 +1,20 @@
-require 'view_builder/corekit'
-require 'view_builder/show_model_view'
-require 'view_builder/show_model_form'
-require 'view_builder/show_model_list'
-require 'view_builder/show_form'
-require 'view_builder/show_paginate_renderer'
+require 'Showbuilder/corekit'
+require 'Showbuilder/show_model_view'
+require 'Showbuilder/show_model_form'
+require 'Showbuilder/show_model_list'
+require 'Showbuilder/show_form'
+require 'Showbuilder/show_paginate_renderer'
 
-module ViewBuilder
-  include ViewBuilder::Corekit
-  include ViewBuilder::I18nText
-  include ViewBuilder::ShowModelView
-  include ViewBuilder::ShowModelForm
-  include ViewBuilder::ShowModelList
-  include ViewBuilder::ShowForm
+module Showbuilder
+  include Showbuilder::Corekit
+  include Showbuilder::I18nText
+  include Showbuilder::ShowModelView
+  include Showbuilder::ShowModelForm
+  include Showbuilder::ShowModelList
+  include Showbuilder::ShowForm
 
   def show_paginate_renderer
-    ViewBuilder::ShowPaginateRenderer
+    Showbuilder::ShowPaginateRenderer
   end
 
   def show_form_button(text_id = nil)
