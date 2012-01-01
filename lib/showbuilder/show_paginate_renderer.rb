@@ -1,7 +1,7 @@
 require 'will_paginate'
 require 'will_paginate/view_helpers/action_view'
 
-module ViewBuilder
+module Showbuilder
   class ShowPaginateRenderer < WillPaginate::ActionView::LinkRenderer
     def to_html
       links = @options[:page_links] ? windowed_links : []

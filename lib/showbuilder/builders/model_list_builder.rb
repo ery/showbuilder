@@ -1,13 +1,13 @@
-require 'view_builder/builders/template_methods'
-require 'view_builder/builders/model_list_builder/show_columns'
-require 'view_builder/i18n_text'
+require 'showbuilder/builders/template_methods'
+require 'showbuilder/builders/model_list_builder/show_columns'
+require 'showbuilder/i18n_text'
 
-module ViewBuilder
+module Showbuilder
   module Builders
     class ModelListBuilder
-      include ViewBuilder::I18nText
-      include ViewBuilder::Builders::TemplateMethods
-      include ViewBuilder::Builders::ModelListBuilder::ShowColumns
+      include Showbuilder::I18nText
+      include Showbuilder::Builders::TemplateMethods
+      include Showbuilder::Builders::ModelListBuilder::ShowColumns
 
       class Column
         attr_accessor :methods

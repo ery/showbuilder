@@ -1,4 +1,4 @@
-module ViewBuilder
+module Showbuilder
   module I18nText
 
     def current_itext(text_id, *args)

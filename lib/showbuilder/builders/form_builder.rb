@@ -1,11 +1,11 @@
-require 'view_builder/builders/template_methods'
-require 'view_builder/i18n_text'
+require 'showbuilder/builders/template_methods'
+require 'showbuilder/i18n_text'
 
-module ViewBuilder
+module Showbuilder
   module Builders
     class FormBuilder
-      include ViewBuilder::Builders::TemplateMethods
-      include ViewBuilder::I18nText
+      include Showbuilder::Builders::TemplateMethods
+      include Showbuilder::I18nText
 
       def initialize(template)
         @template = template

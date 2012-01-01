@@ -1,4 +1,4 @@
-module ViewBuilder
+module Showbuilder
   module Builders
     class ModelListBuilder
       module ShowColumns

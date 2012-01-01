@@ -1,6 +1,6 @@
-require 'view_builder/builders/model_view_builder'
+require 'showbuilder/builders/model_view_builder'
 
-module ViewBuilder
+module Showbuilder
   module ShowModelView    
     #
     # show_model_view @product do |view|
@@ -18,7 +18,7 @@ module ViewBuilder
     # I18n.t("#{text_group}.price")
     #
     def show_model_view(model, &block)
-      builder = ViewBuilder::Builders::ModelViewBuilder.new(model, self)
+      builder = Showbuilder::Builders::ModelViewBuilder.new(model, self)
       builder.build_model_view(&block)
     end
   end

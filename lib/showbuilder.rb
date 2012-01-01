@@ -1,9 +1,9 @@
-require 'Showbuilder/corekit'
-require 'Showbuilder/show_model_view'
-require 'Showbuilder/show_model_form'
-require 'Showbuilder/show_model_list'
-require 'Showbuilder/show_form'
-require 'Showbuilder/show_paginate_renderer'
+require 'showbuilder/corekit'
+require 'showbuilder/show_model_view'
+require 'showbuilder/show_model_form'
+require 'showbuilder/show_model_list'
+require 'showbuilder/show_form'
+require 'showbuilder/show_paginate_renderer'
 
 module Showbuilder
   include Showbuilder::Corekit

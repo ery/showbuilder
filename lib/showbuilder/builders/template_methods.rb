@@ -1,4 +1,4 @@
-module ViewBuilder
+module Showbuilder
   module Builders
     module TemplateMethods
       attr_reader :template

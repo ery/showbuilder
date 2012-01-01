@@ -1,4 +1,4 @@
-module ViewBuilder
+module Showbuilder
   module Corekit
     def html_contents
       contents = []

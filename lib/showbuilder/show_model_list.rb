@@ -1,6 +1,6 @@
-require 'view_builder/builders/model_list_builder'
+require 'showbuilder/builders/model_list_builder'
 
-module ViewBuilder
+module Showbuilder
   module ShowModelList  
     #
     # show_model_list @products do |list|
@@ -18,7 +18,7 @@ module ViewBuilder
     # end
     #
     def show_model_list(models, text_group = nil, &block)
-      builder = ViewBuilder::Builders::ModelListBuilder.new(self, text_group)
+      builder = Showbuilder::Builders::ModelListBuilder.new(self, text_group)
       builder.build_model_list(models, &block)
     end    
   end

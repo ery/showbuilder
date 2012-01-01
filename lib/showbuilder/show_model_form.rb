@@ -1,6 +1,6 @@
-require 'view_builder/builders/model_form_builder'
+require 'showbuilder/builders/model_form_builder'
 
-module ViewBuilder
+module Showbuilder
   module ShowModelForm
 
     #
@@ -17,7 +17,7 @@ module ViewBuilder
     # I18n.t('customer.password')
     #
     def show_model_form(model, options ={}, &block)
-      options.merge!(:builder => ViewBuilder::Builders::ModelFormBuilder)
+      options.merge!(:builder => Showbuilder::Builders::ModelFormBuilder)
 
       self.html_contents do |contents|
         contents << self.error_messages_for(model)

@@ -1,11 +1,11 @@
-require 'view_builder/builders/template_methods'
-require 'view_builder/i18n_text'
+require 'showbuilder/builders/template_methods'
+require 'showbuilder/i18n_text'
 
-module ViewBuilder
+module Showbuilder
   module Builders
     class ModelFormBuilder < ActionView::Helpers::FormBuilder
-      include ViewBuilder::Builders::TemplateMethods
-      include ViewBuilder::I18nText
+      include Showbuilder::Builders::TemplateMethods
+      include Showbuilder::I18nText
 
       def show_text_input(method)
         self.show_method_input(method) do
