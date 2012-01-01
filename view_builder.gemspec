@@ -14,6 +14,7 @@ Gem::Specification.new do |s|
                       "lib/view_builder/show_model_form.rb",
                       "lib/view_builder/show_model_list.rb",
                       "lib/view_builder/show_model_view.rb",
+                      "lib/view_builder/show_paginate_renderer.rb",
                       "lib/view_builder/builders/form_builder.rb",
                       "lib/view_builder/builders/model_form_builder.rb",
                       "lib/view_builder/builders/model_list_builder.rb",
@@ -21,7 +22,7 @@ Gem::Specification.new do |s|
                       "lib/view_builder/builders/template_methods.rb",
                       "lib/view_builder/builders/model_list_builder/show_columns.rb"
                     ]
-  s.homepage      = 'http://rubygems.org/gems/hola'
+  s.homepage      = 'http://rubygems.org/gems/view_builder'
   s.require_paths = ["lib"]  
 end
 
