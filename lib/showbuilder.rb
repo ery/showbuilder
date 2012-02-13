@@ -80,5 +80,9 @@ module Showbuilder
     end
   end
 
+  def show_model_link_to(name, object)
+    self.link_to name, object
+  end
+
   ::ActionView::Base.send :include, self
 end

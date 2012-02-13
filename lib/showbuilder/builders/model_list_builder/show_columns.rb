@@ -77,9 +77,9 @@ module Showbuilder
             self.content_tag(:td) do
               link_object = self.show_method_link_column__get_link_object(model, methods)
               link_name   = self.show_method_link_column__get_link_name(model, methods, customize_link_name_block)
-              self.link_to link_name, link_object            
+              self.show_model_link_to link_name, link_object
             end
-          end        
+          end
         end
 
         def show_method_link_column__get_link_object(model, methods)

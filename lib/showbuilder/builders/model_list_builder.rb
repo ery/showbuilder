@@ -28,7 +28,7 @@ module Showbuilder
       def build_model_list(models, &block)
         block.call(self)
         
-        contents_tag(:table, :class => 'bordered-table zebra-striped') do |contents|
+        contents_tag(:table, :class => 'table table-bordered table-striped') do |contents|
           contents << self.build_header
           contents << self.build_body(models)
         end

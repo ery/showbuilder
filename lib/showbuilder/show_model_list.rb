@@ -17,6 +17,28 @@ module Showbuilder
     #   list.show_time_link_column      :x_field
     # end
     #
+    # ---------------------------------------------------------------
+    # Demo:
+    # show_model_list @sale do |list|
+    #   list.show_text_link_column :number
+    # end
+    #
+    # Explain:
+    #   text = sale.number
+    #   link = link_to(sale)
+    # ---------------------------------------------------------------
+    #
+    # ---------------------------------------------------------------
+    # Demo:
+    # show_model_list @sale do |list|
+    #   list.show_text_link_column :member, :number
+    # end
+    #
+    # Explain:
+    #   text = sale.member.number
+    #   link = link_to(sale.member)
+    # ---------------------------------------------------------------
+    #
     def show_model_list(models, text_group = nil, &block)
       builder = Showbuilder::Builders::ModelListBuilder.new(self, text_group)
       builder.build_model_list(models, &block)
