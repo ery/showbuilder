@@ -18,6 +18,8 @@ module Showbuilder
       attr_reader   :template
       attr_reader   :text_group
       attr_accessor :columns
+      attr_accessor :table_options
+      attr_accessor :body_row_options
 
       def initialize(template, text_group)
         @template = template
@@ -26,9 +28,12 @@ module Showbuilder
       end
 
       def build_model_list(models, &block)
-        block.call(self)
-        
-        contents_tag(:table, :class => 'table table-bordered table-striped') do |contents|
+        block.call(self)        
+        self.table_options ||= {}
+        self.table_options[:class] ||= ""
+        self.table_options[:class] += " table table-bordered table-striped"
+
+        contents_tag(:table, self.table_options) do |contents|
           contents << self.build_header
           contents << self.build_body(models)
         end
@@ -53,6 +58,7 @@ module Showbuilder
           self.content_tag(:th) do 
             if column.methods            
               methods = Array.wrap(column.methods)
+              methods = filter_method_option(methods)
               text_id = methods.join('.')
               self.current_itext(text_id)
             end
@@ -76,7 +82,7 @@ module Showbuilder
 
       def build_body_row(model)
         options = self.build_body_row_options
-        contents_tag(:tr, options)do |contents|
+        contents_tag(:tr, :class => "#{options}")do |contents|
           self.columns.each do |column|
             contents << self.build_body_column(column, model)
           end
@@ -85,7 +91,9 @@ module Showbuilder
 
       def build_body_row_options
         even = self.cycle('', 'even')
-        {:class => even}
+        self.body_row_options ||= {}
+        self.body_row_options[:class] ||= ""
+        self.body_row_options[:class] += " #{even}"
       end
 
       def build_body_row_for_no_record

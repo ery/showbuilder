@@ -15,6 +15,7 @@ module Showbuilder
         # show_text_link_column :member, :number
         # show_text_link_column :member, :number, :link => :member
         # show_text_link_column :member, :number, :link => [:member, :department]
+        # show_text_link_column :member, :number, :link => [:member, :department], :class => 'member_list'
         def show_text_link_column(*methods)
           self.show_method_link_column(*methods) do |value|
             self.safe_html_string(value)
@@ -49,6 +50,12 @@ module Showbuilder
           end
         end
 
+        def show_currency_link_column(*methods)
+          self.show_method_link_column(*methods) do |value|
+            self.currency_string(value)
+          end
+        end
+
         # show_percent_column :percent
         def show_percent_column(*methods)
           self.show_method_column(methods) do |value|
@@ -58,7 +65,7 @@ module Showbuilder
 
         def show_method_column(methods, &block)
           self.show_column(methods) do |model|
-            self.content_tag(:td) do
+            self.content_tag(:td, :class => find_option_form_methods(methods, :class)) do
               method_value = self.call_object_methods(model, methods)
               if block
                 content = block.call(method_value)
@@ -76,7 +83,7 @@ module Showbuilder
           end
 
           self.show_column(methods) do |model|
-            self.content_tag(:td) do
+            self.content_tag(:td, :class => find_option_form_methods(methods, :class)) do
               link_object = self.show_method_link_column__get_link_object(model, methods)
               link_name   = self.show_method_link_column__get_link_name(model, methods, customize_link_name_block)
               self.show_model_link_to link_name, link_object
@@ -84,36 +91,31 @@ module Showbuilder
           end
         end
 
+        def find_option_form_methods(methods, key)
+          last_item = methods.last
+          if last_item.is_a? Hash
+            return last_item[key]
+          else
+            return nil
+          end          
+        end
+
         def show_method_link_column__get_link_object(model, methods)
           if methods.count == 1
             return model
-          end          
-
-          last_item = methods.last
-          if last_item.is_a? Hash
-            if last_item[:link]
-              link_methods = last_item[:link]
-              
-              link_object = self.call_object_methods(model, link_methods)
-              if model.is_a? Customer
-                `echo "link methods is #{link_methods}" > ~/log`
-                `echo "link object is #{link_object}" >> ~/log`
-                `echo "model is #{model}" >> ~/log`
-                `echo "model.category is #{model.category}" >> ~/log`
-              end              
-              
-              return link_object
-            end
+          end 
+                    
+          link_methods = find_option_form_methods(methods, :link)
+          if link_methods
+            link_object = self.call_object_methods(model, link_methods)                
+            return link_object
           end
 
           return model
         end
 
         def show_method_link_column__get_link_name(model, methods, customize_link_name_block)
-          if methods.last.is_a? Hash
-            methods.pop
-          end
-
+          methods = filter_method_option(methods)        
           method_value = self.call_object_methods(model, methods)
           if customize_link_name_block
             link_name = customize_link_name_block.call(method_value)
@@ -131,6 +133,13 @@ module Showbuilder
           self.columns << column
         end
 
+        def filter_method_option(methods)
+          if methods.last.is_a? Hash
+            methods[0..-2]
+          else
+            methods
+          end
+        end
       end
     end
   end
