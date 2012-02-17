@@ -8,12 +8,12 @@ module Showbuilder
       end
 
       if self.current_text_group
-        crrent_text_id = "#{self.current_text_group}.#{text_id}" 
+        current_text_id = "#{self.current_text_group}.#{text_id}" 
       else
-        crrent_text_id = text_id
+        current_text_id = text_id
       end
       
-      self.itext(crrent_text_id, *args)
+      self.itext(current_text_id, *args)      
     end
 
     def current_text_group

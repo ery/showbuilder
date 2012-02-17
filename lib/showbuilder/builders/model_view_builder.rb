@@ -18,7 +18,7 @@ module Showbuilder
         unless @model
           return
         end
-        self.content_tag(:table, :class => "table bordered-table") do
+        self.content_tag(:table, :class => "table table-bordered nohead") do
           @template.capture(self, &block)
         end
       end
@@ -36,8 +36,8 @@ module Showbuilder
         method_link  = self.call_object_methods(model, link_method)
         
         self.contents_tag :tr do |contents|
-          contents << self.content_tag(:td, method_label.to_s, :class => "span2")
-          contents << self.content_tag(:td, :class => "span2") do
+          contents << self.content_tag(:td, method_label.to_s, :class => "span2 left")
+          contents << self.content_tag(:td, :class => "span2 right") do
             self.show_model_link_to(method_value.to_s, method_link)            
           end
         end
@@ -75,11 +75,11 @@ module Showbuilder
         end
 
         self.contents_tag :tr do |contents|
-          contents << self.content_tag(:td, method_label.to_s, :class => "span2")
-          contents << self.content_tag(:td, method_value.to_s, :class => "span2")
+          contents << self.content_tag(:td, method_label.to_s, :class => "span2 left")
+          contents << self.content_tag(:td, method_value.to_s, :class => "span2 right")
         end
       end
-    
+
       protected
 
       def current_text_group

@@ -28,6 +28,12 @@ module Showbuilder
             self.time_string(value)
           end
         end
+        
+        def show_time_link_column(*methods)
+          self.show_method_link_column(*methods) do |value|
+            self.time_string(value)
+          end
+        end
 
         # show_date_column :created_at
         def show_date_column(*methods)

@@ -16,17 +16,18 @@ module Showbuilder
     # I18n.t("customer.email')
     # I18n.t('customer.password')
     #
-    def show_model_form(model, options ={}, &block)
+    def show_model_form(models, options ={}, &block)
+      models = Array.wrap(models)
       options.merge!(:builder => Showbuilder::Builders::ModelFormBuilder)
 
       self.html_contents do |contents|
-        contents << self.error_messages_for(model)
-        contents << self.form_for(model, options) do |form|
+        contents << self.error_messages_for(models.last)
+        contents << self.form_for(models, options) do |form|
           capture(form, &block)
         end
       end
     end
-
+    
     def error_messages_for(*objects)
       options = objects.extract_options!
       options[:header_message] ||= I18n.t(:"activerecord.errors.header", :default => "Invalid Fields")
