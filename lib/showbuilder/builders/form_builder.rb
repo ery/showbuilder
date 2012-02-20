@@ -11,7 +11,9 @@ module Showbuilder
         @template = template
       end
 
-      def show_text_input(method)
+      def show_text_input(method, options = {})
+        options ||={}
+        html_options = options[:html]
         self.show_method_input(method) do
           self.text_field_tag(method, nil, :class => 'xlarge', :id => 'xlInput')
         end
