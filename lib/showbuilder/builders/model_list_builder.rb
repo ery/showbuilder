@@ -60,7 +60,7 @@ module Showbuilder
               methods = Array.wrap(column.methods)
               methods = filter_method_option(methods)
               text_id = methods.join('.')
-              self.current_itext(text_id)
+              self.showbuilder_itext(text_id)
             end
           end
         end
@@ -114,7 +114,7 @@ module Showbuilder
         end
       end
 
-      def current_text_group
+      def showbuilder_itext_base
         @text_group || self.controller_name.to_s.singularize
       end
     end

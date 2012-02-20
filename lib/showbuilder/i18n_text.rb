@@ -1,14 +1,14 @@
 module Showbuilder
   module I18nText
 
-    def current_itext(text_id, *args)
+    def showbuilder_itext(text_id, *args)
       case text_id
       when Array
         text_id = text_id.join('.')
       end
 
-      if self.current_text_group
-        current_text_id = "#{self.current_text_group}.#{text_id}" 
+      if self.showbuilder_itext_base
+        current_text_id = "#{self.showbuilder_itext_base}.#{text_id}" 
       else
         current_text_id = text_id
       end
@@ -16,7 +16,7 @@ module Showbuilder
       self.itext(current_text_id, *args)      
     end
 
-    def current_text_group
+    def showbuilder_itext_base
     end
 
     def itext(id, *args)

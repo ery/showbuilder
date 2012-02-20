@@ -35,7 +35,7 @@ module Showbuilder
       end
 
       def show_method_input(method, options = {})
-        label_text = options[:label_text] || self.current_itext(method)
+        label_text = options[:label_text] || self.showbuilder_itext(method)
         self.contents_tag :div, :class => 'control-group' do |contents|          
           contents << self.label(method, label_text, :class => "control-label")
           contents << self.content_tag(:div, :class => 'controls') do
@@ -46,7 +46,7 @@ module Showbuilder
 
       protected
       
-      def current_text_group
+      def showbuilder_itext_base
         self.object.class.to_s.underscore
       end
       

@@ -31,7 +31,7 @@ module Showbuilder
   def show_page_title
     self.content_tag :div, :class => 'page-header' do
       self.content_tag :h1 do
-        self.current_itext("title_#{self.action_name}")
+        self.showbuilder_itext("title_#{self.action_name}")
       end
     end
   end
@@ -47,7 +47,7 @@ module Showbuilder
     end
   end
 
-  def current_text_group
+  def showbuilder_itext_base
     self.controller_name.to_s.singularize
   end
 
