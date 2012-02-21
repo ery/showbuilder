@@ -30,8 +30,8 @@ module Showbuilder
     
     def error_messages_for(*objects)
       options = objects.extract_options!
-      options[:header_message] ||= I18n.t(:"activerecord.errors.header", :default => "Invalid Fields")
-      options[:message] ||= I18n.t(:"activerecord.errors.message", :default => "Correct the following errors and try again.")
+      options[:header_message] ||= I18n.t("activerecord.errors.header", :default => "Invalid Fields")
+      options[:message] ||= I18n.t("activerecord.errors.message", :default => "Correct the following errors and try again.")
 
       messages = objects.compact.map do |object| 
         object.errors.messages.map do |key, value|
@@ -44,11 +44,10 @@ module Showbuilder
         return
       end
 
-      contents_tag(:div, :class => "alert-message block-message error") do |contents|
-        contents << content_tag(:a, 'x', :class=>'close', :href=>"#")
-        contents << content_tag(:p) do
-          content_tag(:strong, options[:header_message]) + options[:message]
-        end
+      contents_tag(:div, :class => "alert alert-error") do |contents|
+        contents << content_tag(:a, 'x', :class=>'close' , "data-dismiss" => :alert)
+        contents << content_tag(:h3, options[:header_message], :class => "alert-heading")
+        contents << options[:message]
         contents << content_tag(:ul) do
           list_items = messages.map do |msg|
             content_tag(:li, msg)
@@ -56,7 +55,6 @@ module Showbuilder
           list_items.join.html_safe
         end
       end
-
     end
   end
 end

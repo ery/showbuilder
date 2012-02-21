@@ -85,4 +85,8 @@ module Showbuilder
   end
 
   ::ActionView::Base.send :include, self
+
+  ::ActionView::Base.field_error_proc = proc do |html_tag, instance_tag|
+    html_tag
+  end
 end

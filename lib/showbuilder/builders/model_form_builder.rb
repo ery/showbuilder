@@ -101,6 +101,11 @@ module Showbuilder
       def show_method_input(method, options = {})
         label_text = options[:label_text] || self.showbuilder_itext(method)
         div_options = options[:class] || ''
+
+        if object.errors.count > 0 and object.errors[method].count > 0
+          div_options = " error"
+        end
+
         self.contents_tag :div, :class => "control-group #{div_options}" do |contents|          
           contents << self.label(method, label_text, :class => "control-label")
           contents << self.content_tag(:div, :class => 'controls') do
