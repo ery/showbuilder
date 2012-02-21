@@ -23,7 +23,7 @@ module Showbuilder
     text_loading                  = I18n.t("form_button.#{text_id}_loading")
     options                       ||= {}
     options['class']              = "form-button btn btn-primary #{options[:class]}"
-    options['data-loading-text']  = options["data-loading-text"] || text_loading
+    options['data-loading-text']  = options['data-loading-text'] || text_loading
     options['type']               = options[:type] || :button
     self.content_tag(:button, text, options)
   end

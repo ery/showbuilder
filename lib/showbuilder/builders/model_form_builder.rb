@@ -9,8 +9,8 @@ module Showbuilder
 
       def show_text_input(method, options = {})
         options ||={}
-        html_options = options[:html]
-        input_options = options[:input_options]
+        html_options = options[:html] || {}
+        input_options = options[:input_options] || {}
         self.show_method_input(method, html_options) do
           self.text_field(method, input_options)
         end
@@ -101,7 +101,7 @@ module Showbuilder
       def show_method_input(method, options = {})
         label_text = options[:label_text] || self.showbuilder_itext(method)
         div_options = options[:class] || ''
-        self.contents_tag :div, :class => 'control-group #{div_options}' do |contents|          
+        self.contents_tag :div, :class => "control-group #{div_options}" do |contents|          
           contents << self.label(method, label_text, :class => "control-label")
           contents << self.content_tag(:div, :class => 'controls') do
             yield
