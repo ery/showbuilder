@@ -18,11 +18,11 @@ module Showbuilder
   end
 
   def show_form_button(text_id = nil, options = {})
-    text_id                       ||= 'commit'
+    text_id                       ||= 'save'
     text                          = show_itext("form_button.#{text_id}")
     text_loading                  = show_itext("form_button.#{text_id}_loading")
     options                       ||= {}
-    options['class']              = "form-button btn btn-primary #{options[:class]}"
+    options['class']              = "form-button btn #{options[:class]}"
     options['data-loading-text']  = options['data-loading-text'] || text_loading
     options['type']               = options[:type] || :button
     self.content_tag(:button, text, options)
