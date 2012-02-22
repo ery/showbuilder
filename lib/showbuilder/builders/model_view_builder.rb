@@ -31,7 +31,7 @@ module Showbuilder
 
       def show_text_link(link_method, text_method)
         methods      = [link_method, text_method]
-        method_label = self.showbuilder_itext(methods)
+        method_label = self.show_current_itext(methods)
         method_value = self.call_object_methods(model, methods)
         method_link  = self.call_object_methods(model, link_method)
         
@@ -68,7 +68,7 @@ module Showbuilder
       end
 
       def show_method_field(method, &block)
-        method_label = self.showbuilder_itext(method)
+        method_label = self.show_current_itext(method)
         method_value = self.call_object_methods(model, method)
         if block
           method_value = block.call(method_value) 
@@ -82,7 +82,7 @@ module Showbuilder
 
       protected
 
-      def showbuilder_itext_base
+      def show_current_itext_base
         self.model.class.to_s.underscore
       end
     end

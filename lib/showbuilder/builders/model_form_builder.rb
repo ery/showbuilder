@@ -53,7 +53,7 @@ module Showbuilder
 
       def show_select_by_number_field_core(method, choices, include_blank = false, html_options = nil)
         method_for_number = "#{method}_number"
-        label_text = showbuilder_itext("#{method}.name")  
+        label_text = show_current_itext("#{method}.name")  
 
         self.show_method_input(method_for_number, :label_text => label_text) do
           self.select(method_for_number, choices, {:include_blank => include_blank}, html_options||{})
@@ -75,7 +75,7 @@ module Showbuilder
             contents << content_tag(:label , :class => "add-on") do
               check_box(method, options)
             end
-            contents << self.text_field(:discount_percent ,:class => 'discount', :placeholder => itext('product.discount_example'))
+            contents << self.text_field(:discount_percent ,:class => 'discount', :placeholder => show_itext('product.discount_example'))
           end
         end
       end
@@ -94,12 +94,12 @@ module Showbuilder
       def show_check_box_list_field_item(method, label_options = {})
         contents_tag(:label, label_options) do |contents|
           contents << self.check_box(method, options)
-          contents << self.content_tag(:span, self.showbuilder_itext("#{method}_detail")) #method_label(method, "#{method}_detail")
+          contents << self.content_tag(:span, self.show_current_itext("#{method}_detail")) #method_label(method, "#{method}_detail")
         end
       end
 
       def show_method_input(method, options = {})
-        label_text = options[:label_text] || self.showbuilder_itext(method)
+        label_text = options[:label_text] || self.show_current_itext(method)
         div_options = options[:class] || ''
 
         if object.errors.count > 0 and object.errors[method].count > 0
@@ -116,7 +116,7 @@ module Showbuilder
 
       protected
 
-      def showbuilder_itext_base
+      def show_current_itext_base
         self.object.class.to_s.underscore
       end
 

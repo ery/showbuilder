@@ -60,7 +60,7 @@ module Showbuilder
               methods = Array.wrap(column.methods)
               methods = filter_method_option(methods)
               text_id = methods.join('.')
-              self.showbuilder_itext(text_id)
+              self.show_current_itext(text_id)
             end
           end
         end
@@ -100,7 +100,7 @@ module Showbuilder
         contents_tag :tr do |contents|
           self.columns.each_index do |index|
             contents << self.content_tag(:td) do
-              itext('no_record') if index == 0
+              show_itext('no_record') if index == 0
             end
           end
         end
@@ -114,7 +114,7 @@ module Showbuilder
         end
       end
 
-      def showbuilder_itext_base
+      def show_current_itext_base
         @text_group || self.controller_name.to_s.singularize
       end
     end

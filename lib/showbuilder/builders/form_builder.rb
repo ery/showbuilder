@@ -36,7 +36,7 @@ module Showbuilder
 
       def show_method_input(method)
         self.contents_tag :div, :class => :clearfix do |contents|
-          label_text = self.showbuilder_itext(method)
+          label_text = self.show_current_itext(method)
           contents << self.label(method, label_text)
           contents << self.content_tag(:div, :class => :input) do
             yield
@@ -44,7 +44,7 @@ module Showbuilder
         end
       end
 
-      def showbuilder_itext_base
+      def show_current_itext_base
         self.controller_name.to_s.singularize + '.form'
       end
     end

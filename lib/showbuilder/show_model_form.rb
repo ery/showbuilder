@@ -30,8 +30,8 @@ module Showbuilder
     
     def error_messages_for(*objects)
       options = objects.extract_options!
-      options[:header_message] ||= I18n.t("activerecord.errors.header", :default => "Invalid Fields")
-      options[:message] ||= I18n.t("activerecord.errors.message", :default => "Correct the following errors and try again.")
+      options[:header_message]  ||= show_itext("activerecord.errors.header", :default => "Invalid Fields")
+      options[:message]         ||= show_itext("activerecord.errors.message", :default => "Correct the following errors and try again.")
 
       messages = objects.compact.map do |object| 
         object.errors.messages.map do |key, value|

@@ -19,8 +19,8 @@ module Showbuilder
 
   def show_form_button(text_id = nil, options = {})
     text_id                       ||= 'commit'
-    text                          = I18n.t("form_button.#{text_id}")
-    text_loading                  = I18n.t("form_button.#{text_id}_loading")
+    text                          = show_itext("form_button.#{text_id}")
+    text_loading                  = show_itext("form_button.#{text_id}_loading")
     options                       ||= {}
     options['class']              = "form-button btn btn-primary #{options[:class]}"
     options['data-loading-text']  = options['data-loading-text'] || text_loading
@@ -31,7 +31,7 @@ module Showbuilder
   def show_page_title
     self.content_tag :div, :class => 'page-header' do
       self.content_tag :h1 do
-        self.showbuilder_itext("title_#{self.action_name}")
+        self.show_current_itext("title_#{self.action_name}")
       end
     end
   end
@@ -47,7 +47,7 @@ module Showbuilder
     end
   end
 
-  def showbuilder_itext_base
+  def show_current_itext_base
     self.controller_name.to_s.singularize
   end
 
