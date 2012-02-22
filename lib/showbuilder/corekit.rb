@@ -2,8 +2,12 @@ module Showbuilder
   module Corekit
     def html_contents
       contents = []
-      yield contents
-      contents.join(' ').html_safe
+      result = yield contents
+      if contents.count > 0
+        contents.join(' ').html_safe
+      else
+        result
+      end
     end
 
     def contents_tag(tag_name, options = {}, &block)
@@ -11,7 +15,11 @@ module Showbuilder
         self.html_contents(&block)
       end
     end
-  
+    
+    def divc(option_class, &block)
+      contents_tag :div, :class => option_class , &block
+    end
+    
     def currency_string(number)
       if number
         number_to_currency(number)
