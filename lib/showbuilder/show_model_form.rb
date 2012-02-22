@@ -19,11 +19,10 @@ module Showbuilder
     def show_model_form(models, options ={}, &block)
       models = Array.wrap(models)
       options.merge!(:builder => Showbuilder::Builders::ModelFormBuilder)
-
-      self.html_contents do |contents|
-        contents << self.error_messages_for(models.last)
-        contents << self.form_for(models, options) do |form|
-          capture(form, &block)
+      self.form_for(models, options) do |form|
+        self.html_contents do |contents|
+          contents << self.error_messages_for(models.last)
+          contents << capture(form, &block)
         end
       end
     end
