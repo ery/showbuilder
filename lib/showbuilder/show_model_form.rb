@@ -35,7 +35,7 @@ module Showbuilder
       return if messages.empty?
 
       contents_tag(:div, :class => "alert alert-error") do |contents|
-        contents << content_tag(:a, 'x', :class=>'close' , "data-dismiss" => :alert)
+        contents << content_tag(:a, '&times'.html_safe, :class=>'close' , "data-dismiss" => :alert)
         contents << content_tag(:strong, flash[:error], :class => "alert-heading") if flash[:error]
         contents << content_tag(:ul) do
           list_items = messages.map do |msg|
