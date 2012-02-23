@@ -24,7 +24,7 @@ module Showbuilder
     options                        ||= {}
     options[:class]                = "form-button btn #{options[:class]}"
     options[:'data-loading-text']  ||= text_loading
-    options[:type]                 ||= :button
+    options[:type]                 ||= :submit
     self.content_tag(:button, text, options)
   end
 
