@@ -41,7 +41,7 @@ module Showbuilder
 
       def show_memo_input(method)
         self.show_method_input(method) do
-          self.text_area(method, :rows => 3, :cols => 40)
+          self.text_area(method, :class => 'input-xlarge', :rows => 5, :cols => 40)
         end
       end
 
