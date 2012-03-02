@@ -17,8 +17,12 @@ module Showbuilder
     # I18n.t('customer.password')
     #
     def show_model_form(models, options ={}, &block)
-      models = Array.wrap(models)
-      options.merge!(:builder => Showbuilder::Builders::ModelFormBuilder)
+      models                 = Array.wrap(models)
+      options                = options || {}
+      options[:builder]      = options[:builder] || Showbuilder::Builders::ModelFormBuilder
+      options[:html]         = options[:html] || {}
+      options[:html][:class] = "#{options[:html][:class]} form-horizontal"
+
       self.form_for(models, options) do |form|
         self.html_contents do |contents|
           contents << self.model_error_messages(models.last)
