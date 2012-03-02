@@ -23,8 +23,8 @@ module Showbuilder
         end
       end
 
-      def show_text(method)
-        self.show_method_field(method) do |value|
+      def show_text(*methods)
+        self.show_method_field(*methods) do |value|
           self.safe_html_string(value)
         end
       end
@@ -67,7 +67,7 @@ module Showbuilder
         end
       end
 
-      def show_method_field(method, &block)
+      def show_method_field(*method, &block)
         method_label = self.show_current_itext(method)
         method_value = self.call_object_methods(model, method)
         if block
