@@ -1,6 +1,6 @@
 Gem::Specification.new do |s|
   s.name          = 'showbuilder'
-  s.version       = '0.0.4'
+  s.version       = '0.0.5'
   s.date          = '2012-05-12'
   s.summary       = 'A Rails View Helper.'
   s.description   = 'A Rails View Helper. Show model/s as view, form, list.'
