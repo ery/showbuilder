@@ -8,7 +8,7 @@ module Showbuilder
       include Showbuilder::I18nText
 
       def show_text_input(method, options = {})
-        options ||={}
+        options ||= {}
         html_options = options[:html] || {}
         input_options = options[:input_options] || {}
         self.show_method_input(method, html_options) do

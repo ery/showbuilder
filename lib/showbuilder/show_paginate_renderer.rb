@@ -30,7 +30,8 @@ module Showbuilder
       end
       if page && page != current_page && page != :gap
         page_link(page, text, :class => span_class)
-      else if page == current_page || page == :gap
+      else
+        if page == current_page || page == :gap
           page_span(page, text, :class => span_class)
         else
           previous_or_next_page(page)
