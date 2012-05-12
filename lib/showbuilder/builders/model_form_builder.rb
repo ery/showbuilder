@@ -44,6 +44,12 @@ module Showbuilder
           self.text_area(method, :rows => 5)
         end
       end
+      
+      def show_select_input(method, choices, lable, options = {}, html_options = {})
+        self.show_method_input(method, :label_text => lable) do
+          self.select(method, choices, options, html_options)
+        end
+      end
 
       def show_method_input(method, options = {})
         label_text = options[:label_text] || self.show_current_itext(method)
