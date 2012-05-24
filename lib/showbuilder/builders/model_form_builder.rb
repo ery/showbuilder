@@ -26,7 +26,7 @@ module Showbuilder
 
       def show_email_input(method)
         self.show_method_input(method) do
-          self.contents_tag(:div, :class => "input-append") do |contents|          
+          self.contents_tag(:div, :class => "input-append") do |contents|
             contents << self.email_field(method, :class => :medium)
             contents << self.content_tag(:span, content_tag(:i, '', :class =>"icon-envelope"), :class => "add-on")
           end
@@ -44,7 +44,7 @@ module Showbuilder
           self.text_area(method, :rows => 5)
         end
       end
-      
+
       def show_select_input(method, choices, lable, options = {}, html_options = {})
         self.show_method_input(method, :label_text => lable) do
           self.select(method, choices, options, html_options)
@@ -59,7 +59,7 @@ module Showbuilder
           div_options = " error"
         end
 
-        self.contents_tag :div, :class => "control-group #{div_options}" do |contents|          
+        self.contents_tag :div, :class => "control-group #{div_options}" do |contents|
           contents << self.label(method, label_text, :class => "control-label")
           contents << self.content_tag(:div, :class => 'controls') do
             yield

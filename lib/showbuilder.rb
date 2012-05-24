@@ -1,7 +1,7 @@
 require 'showbuilder/corekit'
 require 'showbuilder/show_model_view'
 require 'showbuilder/show_model_form'
-require 'showbuilder/show_model_list'
+require 'showbuilder/show_model_table'
 require 'showbuilder/show_form'
 require 'showbuilder/show_paginate_renderer'
 
@@ -10,7 +10,7 @@ module Showbuilder
   include Showbuilder::I18nText
   include Showbuilder::ShowModelView
   include Showbuilder::ShowModelForm
-  include Showbuilder::ShowModelList
+  include Showbuilder::ShowModelTable
   include Showbuilder::ShowForm
 
   def show_paginate_renderer
@@ -89,4 +89,5 @@ module Showbuilder
   ::ActionView::Base.field_error_proc = proc do |html_tag, instance_tag|
     html_tag
   end
+
 end
