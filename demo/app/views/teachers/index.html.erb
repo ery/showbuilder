@@ -1,5 +1,10 @@
 <h1>Listing teachers</h1>
 
+<%= show_model_table @teachers do |row| %>
+  <%= row.show_text_link_column :name %>
+  <%= row.show_text_link_column :phone %>
+<%- end %>
+
 <table>
   <tr>
     <th>Name</th>
