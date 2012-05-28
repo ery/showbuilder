@@ -1,0 +1,2 @@
+#!/usr/bin/env bash
+rvm --create  ruby-1.9.3-p0@showbuilder_demo
