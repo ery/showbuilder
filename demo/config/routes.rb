@@ -1,4 +1,6 @@
 Demo::Application.routes.draw do
+  resources :teams
+
   resources :teachers
 
   get "home/index"
