@@ -1,2 +1,23 @@
 Use this README file to introduce your application and point to useful places in the API for learning more.
 Run "rake doc:app" to generate API documentation for your models, controllers, helpers, and libraries.
+
+school
+
+belongs
+has many
+has one
+
+team
+teacher
+student
+
+team belongs teacher
+team has many student
+
+
+rails generate scaffold Teacher name:string phone:string
+rails generate scaffold Team name:string teacher:references
+rails generate scaffold Student name:string team:references
+
+
+
