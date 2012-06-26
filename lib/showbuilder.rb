@@ -51,7 +51,7 @@ module Showbuilder
     self.controller_name.to_s.singularize
   end
 
-  def call_object_methods(object, methods)    
+  def call_object_methods(object, methods)
     unless object
       return
     end

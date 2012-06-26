@@ -1,12 +1,16 @@
 module Showbuilder
   module Corekit
+
     def html_contents
       contents = []
       result = yield contents
+
       if contents.count > 0
-        contents.join(' ').html_safe
-      else
-        result
+        return contents.join(' ').html_safe
+      end
+
+      if result.respond_to?(:html_safe)
+        return result.html_safe
       end
     end
 
@@ -15,11 +19,11 @@ module Showbuilder
         self.html_contents(&block)
       end
     end
-    
+
     def divc(option_class, &block)
       contents_tag :div, :class => option_class , &block
     end
-    
+
     def currency_string(number)
       if number
         number_to_currency(number)
@@ -64,6 +68,6 @@ module Showbuilder
         text.to_s
       end
     end
+
   end
 end
-
