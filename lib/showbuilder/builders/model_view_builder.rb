@@ -14,7 +14,7 @@ module Showbuilder
         @template   = template
       end
 
-      def build_model_view(&block)        
+      def build_model_view(&block)
         unless @model
           return
         end
@@ -34,11 +34,11 @@ module Showbuilder
         method_label = self.show_current_itext(methods)
         method_value = self.call_object_methods(model, methods)
         method_link  = self.call_object_methods(model, link_method)
-        
+
         self.contents_tag :tr do |contents|
-          contents << self.content_tag(:td, method_label.to_s, :class => "span2 left")
-          contents << self.content_tag(:td, :class => "span2 right") do
-            self.show_model_link_to(method_value.to_s, method_link)            
+          contents << self.content_tag(:td, method_label.to_s)
+          contents << self.content_tag(:td) do
+            self.show_model_link_to(method_value.to_s, method_link)
           end
         end
       end
@@ -71,12 +71,12 @@ module Showbuilder
         method_label = self.show_current_itext(method)
         method_value = self.call_object_methods(model, method)
         if block
-          method_value = block.call(method_value) 
+          method_value = block.call(method_value)
         end
 
         self.contents_tag :tr do |contents|
-          contents << self.content_tag(:td, method_label.to_s, :class => "span2 left")
-          contents << self.content_tag(:td, method_value.to_s, :class => "span2 right")
+          contents << self.content_tag(:td, method_label.to_s)
+          contents << self.content_tag(:td, method_value.to_s)
         end
       end
 
