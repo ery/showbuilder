@@ -27,15 +27,17 @@ module Showbuilder
       def show_email_input(method)
         self.show_method_input(method) do
           self.contents_tag(:div, :class => "input-append") do |contents|
-            contents << self.email_field(method, :class => :medium)
-            contents << self.content_tag(:span, content_tag(:i, '', :class =>"icon-envelope"), :class => "add-on")
+            contents << self.email_field(method)
+            contents << self.content_tag(:span, :class => "add-on") do
+              content_tag(:i, '', :class =>"icon-envelope")
+            end
           end
         end
       end
 
       def show_password_input(method)
         self.show_method_input(method) do
-          self.password_field(method, :class => 'input-large changes')
+          self.password_field(method)
         end
       end
 
