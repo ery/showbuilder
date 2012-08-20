@@ -1,7 +1,7 @@
 Gem::Specification.new do |s|
   s.name          = 'showbuilder'
-  s.version       = '0.0.9'
-  s.date          = '2012-06-27'
+  s.version       = '0.0.10'
+  s.date          = '2012-08-21'
   s.summary       = 'A Rails View Helper.'
   s.description   = 'A Rails View Helper. Show model/s as view, form, table.'
   s.authors       = ['Ery Wang, Mario Du']
