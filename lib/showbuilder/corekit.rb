@@ -1,6 +1,39 @@
 module Showbuilder
   module Corekit
 
+    def call_object_methods(object, methods)
+      unless object
+        return
+      end
+
+      methods = Array.wrap(methods)
+      if methods.count == 0
+        return
+      end
+
+      first_method = methods.first
+      unless first_method
+        return
+      end
+
+      unless object.respond_to?(first_method)
+        return
+      end
+
+      method_result = object.send(first_method)
+      if methods.count <= 1
+        return method_result
+      else
+        remaining_methods = methods.clone
+        remaining_methods.shift
+        return call_object_methods(method_result, remaining_methods)
+      end
+    end
+
+    def merge_class_option(original, another)
+      "#{original} #{another}".strip
+    end
+
     def html_contents
       contents = []
       result = yield contents

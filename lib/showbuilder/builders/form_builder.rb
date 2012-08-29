@@ -14,13 +14,13 @@ module Showbuilder
       def show_text_input(method, options = {})
         options ||={}
         html_options = options[:html]
-        self.show_method_input(method) do
+        self.show_method_shell(method) do
           self.text_field_tag(method, nil, :class => 'xlarge', :id => 'xlInput')
         end
       end
 
       def show_email_input(method)
-        self.show_method_input(method) do
+        self.show_method_shell(method) do
           self.contents_tag(:div, :class => "input-append") do |contents|
             contents << self.email_field_tag(method, nil, :class => 'xlarge', :id => 'xlInput')
             contents << self.content_tag(:span, "@", :class => "add-on")
@@ -29,12 +29,12 @@ module Showbuilder
       end
 
       def show_password_input(method)
-        self.show_method_input(method) do
+        self.show_method_shell(method) do
           self.password_field_tag(method, nil, :class => 'xlarge', :id => 'xlInput')
         end
       end
 
-      def show_method_input(method)
+      def show_method_shell(method)
         self.contents_tag :div, :class => :clearfix do |contents|
           label_text = self.show_current_itext(method)
           contents << self.label(method, label_text)
