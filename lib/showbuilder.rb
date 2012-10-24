@@ -51,8 +51,8 @@ module Showbuilder
     self.controller_name.to_s.singularize
   end
 
-  def show_model_link_to(name, object)
-    self.link_to name, object
+  def show_model_link_to(name, options)
+    self.link_to name, options
   end
 
   ::ActionView::Base.send :include, self

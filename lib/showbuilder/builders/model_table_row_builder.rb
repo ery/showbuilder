@@ -46,6 +46,7 @@ module Showbuilder
       # show_text_link_column :sale, :number
       # show_text_link_column :sale, :number, :link => :sale
       # show_text_link_column :sale, :number, :link => [:sale, :customer]
+      # show_text_link_column :sale, :number, :link => ->(book){ book_path(book) }
       def show_text_link_column(*methods)
         return show_header_column(methods) if is_header
 
@@ -59,6 +60,7 @@ module Showbuilder
       # show_date_link_column :sale, :create_at
       # show_date_link_column :sale, :create_at, :link => :sale
       # show_date_link_column :sale, :create_at, :link => [:sale, :customer]
+      # show_date_link_column :sale, :create_at, :link => ->(book){ book_path(book) }
       def show_date_link_column(*methods)
         return show_header_column(methods) if is_header
 
@@ -72,6 +74,7 @@ module Showbuilder
       # show_time_link_column :sale, :create_at
       # show_time_link_column :sale, :create_at, :link => :sale
       # show_time_link_column :sale, :create_at, :link => [:sale, :customer]
+      # show_time_link_column :sale, :create_at, :link => ->(book){ book_path(book) }
       def show_time_link_column(*methods)
         return show_header_column(methods) if is_header
 
@@ -83,8 +86,9 @@ module Showbuilder
 
       # show_currency_link_column :price
       # show_currency_link_column :product, :price
-      # show_currency_link_column :product, :price, :link => :product
-      # show_currency_link_column :product, :price, :link => [:sale, :customer]
+      # show_currency_link_column :product, :price,     :link => :product
+      # show_currency_link_column :product, :price,     :link => [:sale, :customer]
+      # show_currency_link_column :product, :create_at, :link => ->(book){ book_path(book) }
       def show_currency_link_column(*methods)
         return show_header_column(methods) if is_header
 
@@ -107,22 +111,29 @@ module Showbuilder
       end
 
       def show_column_link(name, methods)
-        link_object = get_link_object(methods)
-        show_model_link_to name, link_object
+        link_option = get_link_option(methods)
+        show_model_link_to name, link_option
       end
 
-      def get_link_object(methods)
+      def get_link_option(methods)
         if methods.count == 1
           return model
         end
 
         link_methods = get_methods_option(methods, :link)
-        if link_methods
-          link_object = call_object_methods(model, link_methods)
-          return link_object
+
+        case link_methods
+        when Proc
+          link_option = link_methods.call(model)
+        when String, Symbol, Array
+          link_option = call_object_methods(model, link_methods)
+        when NIL
+          link_option = model
+        else
+          raise 'Unknow type #{link_methods}.'
         end
 
-        return model
+        return link_option
       end
 
       def get_methods_text_value(model, methods)
