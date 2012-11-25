@@ -6,6 +6,10 @@ module Showbuilder
         return
       end
 
+      if methods = :self
+        return object
+      end
+
       methods = Array.wrap(methods)
       if methods.count == 0
         return

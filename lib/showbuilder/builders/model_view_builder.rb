@@ -29,8 +29,89 @@ module Showbuilder
         end
       end
 
-      def show_text_link(link_method, text_method)
-        methods      = [link_method, text_method]
+      # def show_text_link(link_method, text_method)
+      #   methods      = [link_method, text_method]
+      #   method_label = self.show_current_itext(methods)
+      #   method_value = self.call_object_methods(model, methods)
+      #   method_link  = self.call_object_methods(model, link_method)
+
+      #   self.contents_tag :tr do |contents|
+      #     contents << self.content_tag(:td, method_label.to_s)
+      #     contents << self.content_tag(:td) do
+      #       self.show_model_link_to(method_value.to_s, method_link)
+      #     end
+      #   end
+      # end
+
+      def show_text_link(*args)
+
+       link_to_self args
+
+       link_to_special args
+
+       link_to_last_second args
+
+     else raise "Parameter must be Symbols"
+        # if args.count == 1
+        #   if args.first.is_a?(Symbol)
+        #     methods     = args
+        #     link_method = :self
+        #     return create_link methods, link_method
+        #   else
+        #     raise "Parameter must be a Symbol"
+        #   end
+        # end
+
+        # if args.last.is_a?(Hash)
+        #   if args.last[:link]
+        #     methods     = args[0..-2]
+        #     link_method = args.last[:link]
+        #     return create_link methods, link_method
+        #   else
+        #     raise 'Hash key must be ":link"'
+        #   end
+        # end
+
+        # args.each do |item|
+        #   raise "Parameter must be Symbols" unless item.is_a?(Symbol)
+        # end
+
+        # methods      = args
+        # link_method  = args[-2]
+        # create_link methods, link_method
+      end
+
+      def link_to_self(args)
+        if args.count == 1
+          if args.first.is_a?(Symbol)
+            methods     = args
+            link_method = :self
+            return create_link methods, link_method
+          else
+            raise "Parameter must be a Symbol"
+          end
+        end
+      end
+
+      def link_to_special(args)
+        if args.last.is_a?(Hash)
+          if args.last[:link]
+            methods     = args[0..-2]
+            link_method = args.last[:link]
+            return create_link methods, link_method
+          else
+            raise 'Hash key must be ":link"'
+          end
+        end
+      end
+
+      def link_to_last_second(args)
+        methods      = args
+        link_method  = args[-2]
+        create_link methods, link_method
+      end
+
+      def create_link(methods, link_method)
         method_label = self.show_current_itext(methods)
         method_value = self.call_object_methods(model, methods)
         method_link  = self.call_object_methods(model, link_method)
