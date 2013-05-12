@@ -42,6 +42,24 @@ module Showbuilder
         content_tag :td, content
       end
 
+      # show_time_column :create_at
+      # show_time_column :sale, :create_at
+      def show_time_column(*methods)
+        return show_header_column(methods) if is_header
+
+        content = get_methods_time_value(model, methods)
+        content_tag :td, content
+      end
+
+      # show_date_column :create_at
+      # show_date_column :sale, :create_at
+      def show_date_column(*methods)
+        return show_header_column(methods) if is_header
+
+        content = get_methods_date_value(model, methods)
+        content_tag :td, content
+      end
+
       # show_text_link_column :number
       # show_text_link_column :sale, :number
       # show_text_link_column :sale, :number, :link => :sale
