@@ -21,7 +21,7 @@ module Showbuilder
         return show_header_column(methods) if is_header
 
         content = get_methods_text_value(model, methods)
-        content_tag :td, content
+        content_tag :td, content, :class => 'text'
       end
 
       # show_currency_column :price
@@ -30,7 +30,7 @@ module Showbuilder
         return show_header_column(methods) if is_header
 
         content = get_methods_currency_value(model, methods)
-        content_tag :td, content
+        content_tag :td, content, :class => 'currency'
       end
 
       # show_percent_column :discount
@@ -39,7 +39,7 @@ module Showbuilder
         return show_header_column(methods) if is_header
 
         content = get_methods_percent_value(model, methods)
-        content_tag :td, content
+        content_tag :td, content, :class => 'percent'
       end
 
       # show_time_column :create_at
@@ -48,7 +48,7 @@ module Showbuilder
         return show_header_column(methods) if is_header
 
         content = get_methods_time_value(model, methods)
-        content_tag :td, content
+        content_tag :td, content, :class => 'time'
       end
 
       # show_date_column :create_at
@@ -57,7 +57,7 @@ module Showbuilder
         return show_header_column(methods) if is_header
 
         content = get_methods_date_value(model, methods)
-        content_tag :td, content
+        content_tag :td, content, :class => 'date'
       end
 
       # show_text_link_column :number
@@ -69,7 +69,7 @@ module Showbuilder
         return show_header_column(methods) if is_header
 
         name = get_methods_text_value(model, methods)
-        content_tag :td do
+        content_tag :td, :class => 'text' do
           show_column_link name, methods
         end
       end
@@ -83,7 +83,7 @@ module Showbuilder
         return show_header_column(methods) if is_header
 
         name = get_methods_date_value(model, methods)
-        content_tag :td do
+        content_tag :td, :class => 'date' do
           show_column_link name, methods
         end
       end
@@ -97,7 +97,7 @@ module Showbuilder
         return show_header_column(methods) if is_header
 
         name = get_methods_time_value(model, methods)
-        content_tag :td do
+        content_tag :td, :class => 'time' do
           show_column_link name, methods
         end
       end
@@ -111,7 +111,7 @@ module Showbuilder
         return show_header_column(methods) if is_header
 
         name = get_methods_currency_value(model, methods)
-        content_tag :td do
+        content_tag :td, :class => 'currency' do
           show_column_link name, methods
         end
       end
