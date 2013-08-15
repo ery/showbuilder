@@ -1,4 +1,5 @@
 require 'showbuilder/builders/model_table_row_builder'
+require 'showbuilder/sequence_manager'
 
 module Showbuilder
   module ShowModelTable
@@ -24,6 +25,8 @@ module Showbuilder
     end
 
     def show_model_table_body(models, &block)
+      SequenceManager.initialize_sequence(params)
+
       contents_tag :tbody do |contents|
         models.each do |model|
           contents << show_model_table_body_row(model, &block)

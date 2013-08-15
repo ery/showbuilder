@@ -1,4 +1,5 @@
 require 'showbuilder/builders/template_methods'
+require 'showbuilder/sequence_manager'
 require 'showbuilder/i18n_text'
 
 module Showbuilder
@@ -13,6 +14,16 @@ module Showbuilder
 
       def initialize(template)
         @template = template
+      end
+
+      # show_sequence_column
+      # show_sequence_column :code
+      def show_sequence_column(*args)
+        args = :sequence if args.empty?
+        return show_header_column(args) if is_header
+
+        sequence = SequenceManager.get_sequence
+        content_tag :td, sequence.to_s, :class => 'sequence'
       end
 
       # show_text_column :number
@@ -116,8 +127,9 @@ module Showbuilder
         end
       end
 
-      private
-
+      # show_header_column
+      # show_header_column :balance
+      # show_header_column :reminder
       def show_header_column(methods = nil)
         text = ''
         if methods
@@ -127,6 +139,8 @@ module Showbuilder
         end
         content_tag :th, text
       end
+
+      private
 
       def show_column_link(name, methods)
         link_option = get_link_option(methods)
