@@ -2,6 +2,7 @@ Gem::Specification.new do |s|
   s.name          = 'showbuilder'
   s.version       = '0.0.15'
   s.date          = '2013-08-15'
+  s.license       = 'MIT'
   s.summary       = 'A Rails View Helper.'
   s.description   = 'A Rails View Helper. Base on Twitter Bootstrap v2.0.4. Fast show model/s as view, form, table.'
   s.authors       = ['Ery Wang, Mario Du']
@@ -10,5 +11,3 @@ Gem::Specification.new do |s|
   s.files         = Dir['lib/*', 'lib/**/*']
   s.require_paths = ['lib']
 end
-
-
