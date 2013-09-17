@@ -1,0 +1,18 @@
+<div class="page-header">
+  <h1>Show Student</h1>
+</div>
+
+<div class="subnav">
+  <ul class="nav nav-pills">
+    <li><%= link_to 'Edit', edit_student_path(@student) %></li>
+    <li><%= link_to 'Delete', student_path(@student), :method => :delete, :confirm => "Are you sure?" %></li>
+  </ul>
+</div>
+
+<%= show_model_view @student do |view| %>
+  <%= view.show_text :id %>
+  <%= view.show_text :number %>
+  <%= view.show_text :name %>
+  <%= view.show_text :age %>
+  <%= view.show_text :sex %>
+<% end %>

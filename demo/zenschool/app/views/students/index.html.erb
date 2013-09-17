@@ -1,0 +1,19 @@
+<div class="page-header">
+  <h1>Student List</h1>
+</div>
+
+<div class="subnav">
+  <ul class="nav nav-pills">
+    <li><%= link_to 'New Student', new_student_path %></li>
+  </ul>
+</div>
+
+<%= show_model_table @students do |row| %>
+  <%= row.show_text_link_column :id %>
+  <%= row.show_text_link_column :group, :number, :link => :group %>
+  <%= row.show_text_link_column :group, :name, :link => :group %>
+  <%= row.show_text_link_column :number %>
+  <%= row.show_text_link_column :name %>
+  <%= row.show_text_link_column :age %>
+  <%= row.show_text_link_column :sex %>
+<% end %>

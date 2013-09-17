@@ -1,0 +1,17 @@
+<div class="page-header">
+  <h1>Group List</h1>
+</div>
+
+<div class="subnav">
+  <ul class="nav nav-pills">
+    <li><%= link_to 'New Group', new_group_path %></li>
+  </ul>
+</div>
+
+<%= show_model_table @groups do |row| %>
+  <%= row.show_text_link_column :id %>
+  <%= row.show_text_link_column :number %>
+  <%= row.show_text_link_column :name %>
+  <%= row.show_text_link_column :grade %>
+  <%= row.show_text_link_column :department %>
+<% end %>

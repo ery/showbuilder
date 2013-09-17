@@ -1,0 +1,18 @@
+<div class="page-header">
+  <h1>Show Group</h1>
+</div>
+
+<div class="subnav">
+  <ul class="nav nav-pills">
+    <li><%= link_to 'Edit', edit_group_path(@group) %></li>
+    <li><%= link_to 'Delete', group_path(@group), :method => :delete, :confirm => "Are you sure?" %></li>
+  </ul>
+</div>
+
+<%= show_model_view @group do |view| %>
+  <%= view.show_text :id %>
+  <%= view.show_text :number %>
+  <%= view.show_text :name %>
+  <%= view.show_text :grade %>
+  <%= view.show_text :department %>
+<% end %>

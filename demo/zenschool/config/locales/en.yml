@@ -1,0 +1,27 @@
+# Sample localization file for English. Add more files in this directory for other locales.
+# See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
+
+en:
+  hello: "Hello world"
+
+  group:
+    id: Id
+    number: Number
+    name: Name
+    grade: Grade
+    department: Department
+
+  student:
+    id: Id
+    number: Number
+    name: Name
+    age: Age
+    sex: Sex
+    group_id: Group ID
+    group_number: Group Number
+    group_name: Group Name
+
+  form_button:
+    save: Save
+
+  no_record: No Record

@@ -1,0 +1,17 @@
+<div class="page-header">
+  <h1>Editing Group</h1>
+</div>
+
+<div class="subnav">
+  <ul class="nav nav-pills">
+    <li><%= link_to 'Back', groups_path %></li>
+  </ul>
+</div>
+
+<%= show_model_form @group do |form| %>
+  <%= form.show_text_input :number %>
+  <%= form.show_text_input :name %>
+  <%= form.show_text_input :grade %>
+  <%= form.show_text_input :department %>
+  <%= show_form_button %>
+<% end %>

@@ -1,0 +1,18 @@
+<div class="page-header">
+  <h1>New Student</h1>
+</div>
+
+<div class="subnav">
+  <ul class="nav nav-pills">
+    <li><%= link_to 'Back', students_path %></li>
+  </ul>
+</div>
+
+<%= show_model_form Student.new do |form| %>
+  <%= form.show_text_input :group_id %>
+  <%= form.show_text_input :number %>
+  <%= form.show_text_input :name %>
+  <%= form.show_text_input :sex %>
+  <%= form.show_text_input :age %>
+  <%= show_form_button %>
+<% end %>
